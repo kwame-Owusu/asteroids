@@ -1,5 +1,5 @@
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED
+from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 import pygame
 
 class Player(CircleShape):
@@ -29,6 +29,7 @@ class Player(CircleShape):
   
   def update(self, delta_time: int) -> None:
     """
+    updating the player position
     holding the key pressing logic using WASD
     """
     keys = pygame.key.get_pressed()
@@ -37,4 +38,16 @@ class Player(CircleShape):
        self.rotate(-delta_time) 
     if keys[pygame.K_d]:
        self.rotate(delta_time)
+    
+    if keys[pygame.K_w]:
+      self.move(delta_time) 
+    if keys[pygame.K_s]:
+      self.move(-delta_time) 
+  
+  def move(self, delta_time) -> None:
+    """
+    method to allow player to move forward or backwards
+    """
+    forward = pygame.Vector2(0,1).rotate(self.rotation)
+    self.position += forward * PLAYER_SPEED * delta_time
     
