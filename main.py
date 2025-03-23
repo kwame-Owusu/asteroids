@@ -20,6 +20,7 @@ def main() -> None:
     screen.fill(color=black_color)
     delta_time = clock.tick(60) / 1000
 
+    myPlayer.update(delta_time)
     myPlayer.draw(screen)
     pygame.display.flip()
     
