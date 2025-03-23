@@ -3,6 +3,7 @@ from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 import pygame
 
 class Player(CircleShape):
+  containers = ()
   def __init__(self, x, y):
     super().__init__(x, y, PLAYER_RADIUS)
     self.rotation = 0
@@ -18,7 +19,7 @@ class Player(CircleShape):
     c = self.position - forward * self.radius + right
     return [a, b, c]
   
-  def draw(self, screen) -> None:
+  def draw(self, screen: pygame.Surface) -> None:
     pygame.draw.polygon(screen, (255, 255, 255), self.triangle(), 2)
      
   def rotate(self,delta_time: int) -> None:
