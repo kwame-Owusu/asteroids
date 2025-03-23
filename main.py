@@ -3,7 +3,14 @@ from player import Player
 import pygame
 
 
+
+updatable = pygame.sprite.Group()
+drawable = pygame.sprite.Group()
+
 myPlayer = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+updatable.add(myPlayer)
+drawable.add(myPlayer)
 
 def main() -> None:
   pygame.init()
@@ -20,8 +27,9 @@ def main() -> None:
     screen.fill(color=black_color)
     delta_time = clock.tick(60) / 1000
 
-    myPlayer.update(delta_time)
-    myPlayer.draw(screen)
+    updatable.update(delta_time)
+    for item in drawable:
+      item.draw(screen)
     pygame.display.flip()
     
  

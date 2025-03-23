@@ -44,7 +44,7 @@ class Player(CircleShape):
     if keys[pygame.K_s]:
       self.move(-delta_time) 
   
-  def move(self, delta_time) -> None:
+  def move(self, delta_time: int) -> None:
     """
     method to allow player to move forward or backwards
     """
