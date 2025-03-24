@@ -32,7 +32,12 @@ def main() -> None:
     screen.fill(color=black_color)
     delta_time = clock.tick(60) / 1000
 
-    updatable.update(delta_time)
+    updatable.update(delta_time) 
+    
+    for asteroid in asteroids:
+      if asteroid.has_collided(myPlayer):
+        print("Game Over")
+
     for item in drawable:
       item.draw(screen)
     pygame.display.flip()
