@@ -40,11 +40,11 @@ def main() -> None:
     for asteroid in asteroids:
       if asteroid.has_collided(myPlayer):
         print("Game Over!")
-      
+
       for shot in shots:
         if asteroid.has_collided(shot):
           shot.kill()
-          asteroid.kill()
+          asteroid.split()
 
 
     for item in drawable:
