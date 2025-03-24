@@ -6,6 +6,7 @@ from constants import *
 
 class AsteroidField(pygame.sprite.Sprite):
     containers = ()
+    # calculations of the edges of the screen, using the constants.py constants
     edges = [
         [
             pygame.Vector2(1, 0),
@@ -33,11 +34,18 @@ class AsteroidField(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.spawn_timer = 0.0
 
-    def spawn(self, radius, position, velocity):
+    def spawn(self, radius: int, position: int, velocity: int) -> None:
+        """
+        spawn an asteroid object based on it x,y position and radius
+        """
         asteroid = Asteroid(position.x, position.y, radius)
         asteroid.velocity = velocity
 
-    def update(self, dt):
+    def update(self, dt: int) -> None:
+        """
+        spawn asteroids based on spawn time and spawn rate
+        using the spawn method to spawn from different edges of the screen
+        """
         self.spawn_timer += dt
         if self.spawn_timer > ASTEROID_SPAWN_RATE:
             self.spawn_timer = 0
