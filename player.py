@@ -9,6 +9,7 @@ class Player(CircleShape):
     super().__init__(x, y, PLAYER_RADIUS)
     self.rotation = 0
     self.timer = 0
+    self.points = 0
     
   
   def triangle(self) -> list[int]:

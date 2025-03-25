@@ -45,6 +45,8 @@ def main() -> None:
         if asteroid.has_collided(shot):
           shot.kill()
           asteroid.split()
+          myPlayer.points += 10 #arbitrary number for points increase
+          print(f"points : {myPlayer.points}")
 
 
     for item in drawable:
