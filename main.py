@@ -37,6 +37,13 @@ def main() -> None:
 
     updatable.update(delta_time) 
     
+    #settings for text render for points
+    WHITE = (255, 255, 255)
+    font = pygame.font.Font(None, 36) 
+    
+    # Get the rect of the text surface for positioning
+    
+    # Position the text in the center of the screen
     for asteroid in asteroids:
       if asteroid.has_collided(myPlayer):
         print("Game Over!")
@@ -46,6 +53,11 @@ def main() -> None:
           shot.kill()
           asteroid.split()
           myPlayer.points += 10 #arbitrary number for points increase
+          text_surface = font.render(f"points: {myPlayer.points}", True, WHITE)
+          text_rect = text_surface.get_rect()
+          text_rect.topleft = (10,10)
+          screen.blit(text_surface, text_rect)
+          pygame.display.flip()
           print(f"points : {myPlayer.points}")
 
 
