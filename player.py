@@ -10,7 +10,7 @@ class Player(CircleShape):
     self.rotation = 0
     self.timer = 0
     self.points = 0
-    
+    self.health = 100 
   
   def triangle(self) -> list[int]:
     """

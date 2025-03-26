@@ -48,13 +48,15 @@ def main() -> None:
 
         for asteroid in asteroids:
             if asteroid.has_collided(myPlayer):
-                print("Game Over!")
+                myPlayer.health -= 1  
+                print(f"Health: {myPlayer.health}")
+                if myPlayer.health == 0:
+                    print("Game Over!")
             for shot in shots:
                 if asteroid.has_collided(shot):
                     shot.kill()
                     asteroid.split()
                     myPlayer.points += 10  # arbitrary number for points increase
-                    print(f"Points: {myPlayer.points}")
         
         for item in drawable:
             item.draw(screen)
