@@ -28,6 +28,8 @@ def main() -> None:
     
     # Text rendering setup (moved outside the loop)
     WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
     font = pygame.font.Font(None, 36)
 
     while True:
@@ -46,10 +48,21 @@ def main() -> None:
         points_rect.topleft = (10, 10)
         screen.blit(points_text, points_rect)
 
+        
+        if myPlayer.health <= 35:
+            health_color = RED
+        else:
+            health_color = GREEN
+        #render player health on game window
+        health_text= font.render(f"Health: {myPlayer.health}", True, health_color)
+        health_rect = health_text.get_rect()
+        health_rect.topleft= (10, 40)
+        screen.blit(health_text, health_rect)
+
+
         for asteroid in asteroids:
             if asteroid.has_collided(myPlayer):
-                myPlayer.health -= 1  
-                print(f"Health: {myPlayer.health}")
+                myPlayer.health -= 1   
                 if myPlayer.health == 0:
                     print("Game Over!")
             for shot in shots:
