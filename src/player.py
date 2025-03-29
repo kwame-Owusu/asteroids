@@ -6,6 +6,10 @@ import pygame
 
 
 pygame.mixer.init()
+pygame.mixer.set_num_channels(8)  
+shooting_sound_effect = pygame.mixer.Sound("../assets/shoot-4.mp3")
+shooting_sound_effect.set_volume(0.1)
+shooting_channel = pygame.mixer.Channel(0)
 class Player(CircleShape):
   containers = ()
   def __init__(self, x, y):
@@ -14,8 +18,6 @@ class Player(CircleShape):
     self.timer = 0
     self.points = 0
     self.health = 100 
-    self.shooting_sound_effect = pygame.mixer.Sound("../assets/shoot-1.wav")
-    self.shooting_sound_effect.set_volume(0.3)
   
   def triangle(self) -> list[int]:
     """
@@ -78,4 +80,5 @@ class Player(CircleShape):
     """
     When the player shoots, this sound will play.
     """
-    self.shooting_sound_effect.play()
+    shooting_sound_effect.stop()
+    shooting_sound_effect.play()
