@@ -3,6 +3,9 @@ from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOT_SPEED, PLAYER_SHOOT_COOLDOWN, PLAYER_SPRINT_SPEED
 import pygame
 
+
+
+pygame.mixer.init()
 class Player(CircleShape):
   containers = ()
   def __init__(self, x, y):
@@ -11,6 +14,8 @@ class Player(CircleShape):
     self.timer = 0
     self.points = 0
     self.health = 100 
+    self.shooting_sound_effect = pygame.mixer.Sound("../assets/shoot-1.wav")
+    self.shooting_sound_effect.set_volume(0.3)
   
   def triangle(self) -> list[int]:
     """
@@ -54,6 +59,7 @@ class Player(CircleShape):
     if keys[pygame.K_SPACE]:
       if self.timer > 0:
         return
+      self.shooting_sound()
       self.shoot()
   
   def move(self, delta_time: int, speed_multiplier: float = 1.0) -> None:
@@ -67,3 +73,9 @@ class Player(CircleShape):
     self.timer = PLAYER_SHOOT_COOLDOWN
     new_shot = Shot(self.position.x, self.position.y)
     new_shot.velocity = pygame.math.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOT_SPEED 
+  
+  def shooting_sound(self) -> None:
+    """
+    When the player shoots, this sound will play.
+    """
+    self.shooting_sound_effect.play()
